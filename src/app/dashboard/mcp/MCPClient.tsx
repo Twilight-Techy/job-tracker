@@ -20,8 +20,8 @@ export function MCPClient({ apiKey }: { apiKey: string | null }) {
   }, []);
 
   const mcpUrl = mounted 
-    ? (window.location.hostname === 'localhost' ? 'http://localhost:3001' : window.location.origin) 
-    : 'https://your-mcp-app.onrender.com';
+    ? (process.env.NEXT_PUBLIC_MCP_URL || (window.location.hostname === 'localhost' ? 'http://localhost:3001' : 'https://jobtracker-mcp.onrender.com')) 
+    : (process.env.NEXT_PUBLIC_MCP_URL || 'https://jobtracker-mcp.onrender.com');
 
   const cursorConfig = `{
   "mcpServers": {
