@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: jobtracker-mcp
+    env: node
+    buildCommand: npm install
+    startCommand: npx tsx mcp/index.ts
+    envVars:
+      - key: DATABASE_URL
+        sync: false
