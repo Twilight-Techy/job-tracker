@@ -448,7 +448,7 @@ app.post("/register", (req, res) => {
   res.json({ client_id: "job-tracker", client_secret: "job-tracker-secret" });
 });
 
-app.all("/.well-known/*", (req, res) => {
+app.use("/.well-known", (req, res) => {
   res.json({
     issuer: "https://jobtracker-mcp.onrender.com",
     authorization_endpoint: "https://jobtracker-mcp.onrender.com/sse",
