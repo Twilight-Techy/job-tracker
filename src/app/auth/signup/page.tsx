@@ -4,7 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { EnvelopeSimple, LockKey, User, UserPlus, Briefcase, GoogleLogo } from "@phosphor-icons/react";
+import { EnvelopeSimple, LockKey, User, UserPlus, Briefcase } from "@phosphor-icons/react";
+import { GoogleColorIcon } from "@/components/icons/GoogleColorIcon";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -122,7 +123,7 @@ export default function SignUp() {
                     <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
                   ) : (
                     <>
-                      <GoogleLogo weight="bold" className="mr-2 w-5 h-5" />
+                      <GoogleColorIcon />
                       Continue with Google
                     </>
                   )}
