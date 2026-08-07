@@ -444,6 +444,19 @@ function getOrInitServer() {
   return server;
 }
 
+app.post("/register", (req, res) => {
+  res.json({ client_id: "job-tracker", client_secret: "job-tracker-secret" });
+});
+
+app.all("/.well-known/*", (req, res) => {
+  res.json({
+    issuer: "https://jobtracker-mcp.onrender.com",
+    authorization_endpoint: "https://jobtracker-mcp.onrender.com/sse",
+    token_endpoint: "https://jobtracker-mcp.onrender.com/sse",
+    registration_endpoint: "https://jobtracker-mcp.onrender.com/register"
+  });
+});
+
 app.all("/sse", async (req, res) => {
   try {
     // We authenticate immediately on connection
