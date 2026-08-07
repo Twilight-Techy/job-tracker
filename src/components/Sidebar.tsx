@@ -41,6 +41,9 @@ export function Sidebar({ user }: SidebarProps) {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
+  const { data: session } = authClient.useSession();
+
+  const currentUser = user || session?.user;
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
@@ -103,12 +106,12 @@ export function Sidebar({ user }: SidebarProps) {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button className="flex items-center gap-3 w-full p-2 rounded-lg hover:bg-muted transition-colors text-left">
-              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
-                {user?.name ? user.name.charAt(0).toUpperCase() : <UserCircle size={24} />}
+              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-semibold">
+                {currentUser?.name ? currentUser.name.charAt(0).toUpperCase() : (currentUser?.email ? currentUser.email.charAt(0).toUpperCase() : <UserCircle size={24} />)}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium truncate">{user?.name || "User"}</p>
-                <p className="text-xs text-muted-foreground truncate">{user?.email}</p>
+                <p className="text-sm font-medium truncate">{currentUser?.name || currentUser?.email?.split('@')[0] || "User"}</p>
+                <p className="text-xs text-muted-foreground truncate">{currentUser?.email}</p>
               </div>
             </button>
           </DropdownMenuTrigger>

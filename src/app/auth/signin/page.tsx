@@ -24,17 +24,22 @@ export default function SignIn() {
     setIsLoading(true);
     setError("");
     
-    const { data, error: authError } = await authClient.signIn.email({
-      email,
-      password,
-    });
+    try {
+      const { data, error: authError } = await authClient.signIn.email({
+        email,
+        password,
+      });
 
-    if (authError) {
-      setError(authError.message || "Invalid credentials. Please try again.");
+      if (authError) {
+        setError(authError.message || "Invalid credentials. Please try again.");
+        setIsLoading(false);
+      } else {
+        router.push("/dashboard");
+        router.refresh();
+      }
+    } catch (err: any) {
+      setError(err?.message || "Failed to sign in. Please check your credentials or connection.");
       setIsLoading(false);
-    } else {
-      router.push("/dashboard");
-      router.refresh();
     }
   };
 
