@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "job-tracker": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://jobtracker-mcp.onrender.com/sse",
+        "--header",
+        "Authorization: Bearer jt_0bmf8dyrwe57kwxyh5vewx"
+      ]
+    }
+  }
+}
