@@ -8,12 +8,12 @@ JobTracker is a modern, privacy-focused, AI-ready job application tracking syste
 - **Dynamic Resumes**: Build and store tailored resumes optimized for specific job applications.
 - **Master Context**: A central hub containing your base profile data (education, experiences, links).
 - **AI Agent Integration**: Natively exposes an MCP (Model Context Protocol) server. Point your local AI agent (like Claude Desktop or Cursor) to the server to securely grant it access to read and update your JobTracker data.
-- **Privacy First**: Fully local SQLite database configuration. Your data never leaves your environment unless you explicitly expose it.
+- **Serverless Ready**: Built with a completely stateless architecture and a Neon PostgreSQL database, making it incredibly easy to deploy anywhere.
 
 ## 🛠️ Tech Stack
 
 - **Framework:** [Next.js](https://nextjs.org/) (App Router)
-- **Database:** [SQLite](https://sqlite.org/) with [Drizzle ORM](https://orm.drizzle.team/)
+- **Database:** [Neon PostgreSQL](https://neon.tech/) with [Drizzle ORM](https://orm.drizzle.team/)
 - **Authentication:** [Better Auth](https://better-auth.com/)
 - **UI:** [Tailwind CSS](https://tailwindcss.com/) & [shadcn/ui](https://ui.shadcn.com/)
 - **Icons:** [Phosphor Icons](https://phosphoricons.com/)
@@ -36,7 +36,7 @@ npm install
 
 ### 3. Database Setup
 
-JobTracker uses a local SQLite database (`sqlite.db`). Run the Drizzle migrations to set up the schema:
+JobTracker uses a Neon PostgreSQL database. Create a `.env.local` file and add your `DATABASE_URL`. Then run the Drizzle migrations to set up the schema:
 
 ```bash
 npm run db:push
