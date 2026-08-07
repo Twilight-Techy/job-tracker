@@ -12,6 +12,7 @@ export function MCPClient({ apiKey }: { apiKey: string | null }) {
   const [copiedMcpCursor, setCopiedMcpCursor] = useState(false);
   const [copiedMcpClaude, setCopiedMcpClaude] = useState(false);
   const [copiedMcpAntigravity, setCopiedMcpAntigravity] = useState(false);
+  const [copiedMcpRemote, setCopiedMcpRemote] = useState(false);
 
   const [mounted, setMounted] = useState(false);
 
@@ -54,6 +55,21 @@ export function MCPClient({ apiKey }: { apiKey: string | null }) {
   }
 }`;
 
+  const mcpRemoteConfig = `{
+  "mcpServers": {
+    "job-tracker": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "${mcpUrl}/sse",
+        "--header",
+        "Authorization: Bearer ${apiKey || 'YOUR_API_KEY'}"
+      ]
+    }
+  }
+}`;
+
   const handleCopyMcpCursor = () => {
     navigator.clipboard.writeText(cursorConfig);
     setCopiedMcpCursor(true);
@@ -70,6 +86,12 @@ export function MCPClient({ apiKey }: { apiKey: string | null }) {
     navigator.clipboard.writeText(antigravityConfig);
     setCopiedMcpAntigravity(true);
     setTimeout(() => setCopiedMcpAntigravity(false), 2000);
+  };
+
+  const handleCopyMcpRemote = () => {
+    navigator.clipboard.writeText(mcpRemoteConfig);
+    setCopiedMcpRemote(true);
+    setTimeout(() => setCopiedMcpRemote(false), 2000);
   };
 
   return (
@@ -104,9 +126,31 @@ export function MCPClient({ apiKey }: { apiKey: string | null }) {
           <Tabs defaultValue="antigravity" className="w-full">
             <TabsList className="mb-4">
               <TabsTrigger value="antigravity">Antigravity</TabsTrigger>
+              <TabsTrigger value="remote">mcp-remote / Header</TabsTrigger>
               <TabsTrigger value="cursor">Cursor / Windsurf</TabsTrigger>
               <TabsTrigger value="claude">Claude Desktop</TabsTrigger>
             </TabsList>
+
+            <TabsContent value="remote">
+              <div className="space-y-4">
+                <p className="text-sm text-muted-foreground">
+                  Connect using <code>mcp-remote</code> via npx to pass your API key as a standard <code>Authorization: Bearer</code> header:
+                </p>
+                <div className="relative">
+                  <pre className="bg-muted p-4 rounded-lg text-sm whitespace-pre-wrap font-mono text-muted-foreground overflow-x-auto pr-12">
+{mcpRemoteConfig}
+                  </pre>
+                  <Button 
+                    size="icon" 
+                    variant="secondary" 
+                    className="absolute top-2 right-2 h-8 w-8"
+                    onClick={handleCopyMcpRemote}
+                  >
+                    {copiedMcpRemote ? <Check size={14} className="text-green-500" /> : <Copy size={14} />}
+                  </Button>
+                </div>
+              </div>
+            </TabsContent>
 
             <TabsContent value="antigravity">
               <div className="space-y-4">
