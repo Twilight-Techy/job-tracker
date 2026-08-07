@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { redirect } from "next/navigation";
 import { getUserFromReq } from "@/lib/auth-helpers";
 import { Sidebar } from "@/components/Sidebar";
 
@@ -6,6 +7,10 @@ export const dynamic = "force-dynamic";
 
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
   const user = await getUserFromReq();
+
+  if (!user?.id) {
+    redirect("/auth/signin");
+  }
 
   return (
     <div className="flex min-h-screen bg-background">
