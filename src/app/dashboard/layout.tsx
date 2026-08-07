@@ -2,6 +2,8 @@ import { ReactNode } from "react";
 import { getUserFromReq } from "@/lib/auth-helpers";
 import { Sidebar } from "@/components/Sidebar";
 
+export const dynamic = "force-dynamic";
+
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
   const user = await getUserFromReq();
 

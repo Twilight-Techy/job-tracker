@@ -5,6 +5,8 @@ import { eq } from "drizzle-orm";
 import { ResumePreviewClient } from "./ResumePreviewClient";
 import { getUserFromReq } from "@/lib/auth-helpers";
 
+export const dynamic = "force-dynamic";
+
 export default async function ResumePage({ params }: { params: Promise<{ id: string }> }) {
   const user = await getUserFromReq();
   const resolvedParams = await params;
