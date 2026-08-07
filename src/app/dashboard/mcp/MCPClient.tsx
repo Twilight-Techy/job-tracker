@@ -62,9 +62,7 @@ export function MCPClient({ apiKey }: { apiKey: string | null }) {
       "args": [
         "-y",
         "mcp-remote",
-        "${mcpUrl}/sse",
-        "--header",
-        "Authorization: Bearer ${apiKey || 'YOUR_API_KEY'}"
+        "${mcpUrl}/sse?apiKey=${apiKey || 'YOUR_API_KEY'}"
       ]
     }
   }

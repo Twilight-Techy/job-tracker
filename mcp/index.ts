@@ -444,7 +444,7 @@ function getOrInitServer() {
   return server;
 }
 
-app.get("/sse", async (req, res) => {
+app.all("/sse", async (req, res) => {
   try {
     // We authenticate immediately on connection
     const userId = await verifyApiKeyAndGetUser(req);
